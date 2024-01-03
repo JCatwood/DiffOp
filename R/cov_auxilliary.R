@@ -151,15 +151,15 @@ uni_differential <- function(PARAM, fd_eval_mat_loc1, fd_eval_mat_loc2, LAT1D, L
 
   STATIONARY_PARAM <- c(SCALE_HORIZONTAL_SPACE, SCALE_VERTICAL_SPACE, a1, b1, d1, a2, b2, d2, smoothness)
 
-  f <- expr^(smoothness - 1) * besselK(expr, smoothness - 1)
-  f_prime <- expr^(smoothness - 2) * besselK(expr, smoothness - 2)
+  f <- expr^(smoothness) * besselK(expr, smoothness)
+  f_prime <- expr^(smoothness - 1) * besselK(expr, smoothness - 1)
 
   C1_val <- C1(stationary_param = STATIONARY_PARAM, nonstationary_param1 = c1, nonstationary_param2 = c2,
                lat1d = LAT1D, lon1d = LON1D, pres1 = PRES1, lat2d = LAT2D, lon2d = LON2D, pres2 = PRES2, radius)
   C2_val <- C2(stationary_param = STATIONARY_PARAM, nonstationary_param1 = c1, nonstationary_param2 = c2,
                lat1d = LAT1D, lon1d = LON1D, pres1 = PRES1, lat2d = LAT2D, lon2d = LON2D, pres2 = PRES2, radius)
 
-  val <- con * (C1_val * f_prime + C2_val * f + d1 * d2 * (expr^2 * f_prime + 2 * (smoothness - 1) * f))
+  val <- con * (C1_val * f_prime + C2_val * f + d1 * d2 * (expr^2 * f_prime + 2 * (smoothness) * f))
   diag(val) <- con * (diag(C1_val) + diag(C2_val)) + sigma_square * d1 * d2
 
   return(val)
