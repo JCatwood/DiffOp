@@ -28,7 +28,7 @@ h3 <- function(scale_horizontal_space, lat1d, lon1d, lat2d, lon2d, radius){
 
   con = 4 * scale_horizontal_space^2 * radius^2
 
-  return(con * sin(l / 2) * cos(l / 2))
+  return(con * sin(l / 2) * cos(l / 2) * cos(lat1r) * cos(lat2r))
 }
 
 h33 <- function(scale_horizontal_space, lat1d, lon1d, lat2d, lon2d, radius){
@@ -41,7 +41,7 @@ h33 <- function(scale_horizontal_space, lat1d, lon1d, lat2d, lon2d, radius){
 
   con = 2 * scale_horizontal_space^2 * radius^2
 
-  return(con * ((cos(l / 2))^2 - (sin(l / 2))^2))
+  return(con * ((cos(l / 2))^2 - (sin(l / 2))^2) * cos(lat1r) * cos(lat2r))
 }
 
 h12 <- function(scale_horizontal_space, lat1d, lon1d, lat2d, lon2d, radius){
